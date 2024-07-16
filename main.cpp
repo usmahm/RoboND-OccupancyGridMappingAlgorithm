@@ -79,11 +79,32 @@ void occupancyGridMapping(double Robotx, double Roboty, double Robottheta, doubl
 void visualization()
 {
     //TODO: Initialize a plot named Map of size 300x150
+    plt::title("Map");
+    plt::xlim(0, 300);
     
     //TODO: Loop over the log odds values of the cells and plot each cell state. 
     //Unkown state: green color, occupied state: black color, and free state: red color 
+    for (int i = 0; i < 300; i++) {
+        vector<double> x = l[i];
+
+        for (double y : x) {
+            std::string marker;
+
+            if (y > locc) {
+                marker = "b+"
+            } else if (y < lfree) {
+                marker = "r+"
+            } else {
+                marker = "g+";
+            }
+
+            plt::plot(i, y, marker);
+        }
+    }
     
     //TODO: Save the image and close the plot 
+    plt::save("laserfindermap");
+    plt::clf();
 }
 
 int main()
